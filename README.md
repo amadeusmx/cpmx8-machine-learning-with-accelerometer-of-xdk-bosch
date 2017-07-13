@@ -1,48 +1,71 @@
+# CPMX-8 XDK Bosh
+
+## Resumen
+
+
 Ejemplo de un sistema de aprendizaje basado en machine learning.
 
-A partir del movimiento de un sensor acelerometro en la mano o pierna de una persona, se debe predecir 
-si dicha persona está caminando, trotando, si está parada o sentada.
+A partir del registro del sensor XDK (Bosch), se deberá predecir si dicha persona está caminando, trotando, de pie o sentada.
 
-Integra:
+## Stack
 
-apache spark 2.1.1
-Python 2.7
-Mllib
-Sensor XDK bosch
+* [Apache Spark](https://spark.apache.org/downloads.html) - 2.1.1
+* [Python](https://www.python.org/downloads/) - 2.7
+* [Mllib](https://spark.apache.org/mllib/)
+* [Sensor XDK Bosch](https://xdk.bosch-connectivity.com/)
 
-Pasos para hacer funcionar dicho ejemplo: (Tener un sensor bosch XDK)
+## Getting Started (Ubuntu)
 
-Bajar el framework apache spark 2.1.1
-Descomprimirlo en alguna carpeta de ubuntu linux
+Hacer funcionar el sensor XDK puedes encontrar la guía de inicio [aquí](https://xdk.bosch-connectivity.com/documents/37728/219851/XDK_Guide_WB_First_Steps.pdf/2687e19a-6e73-4803-94ed-6be59eaab010)
 
-Declarar variables del sistema:
+Descargar y descomprimir Apache Spark [download](https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz)
 
-JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre      (Cambia dependiendo de tu sistema)
+```bash
+$ wget https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz
+$ tar zxfv spark-2.1.1-bin-hadoop2.7.tgz
+```
+
+Declarar variables de entorno:
+
+```bash
+JAVA_HOME=/path/to/jvm
 export JAVA_HOME
 PATH=$PATH:$JAVA_HOME
 export PATH
 
-SPARK_HOME=/usr/local/spark-2.1.1
+SPARK_HOME=/path/to/apache/spark
 export SPARK_HOME
 PATH=$PATH:$SPARK_HOME
 export PATH
 
 export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
+```
+
+Instalar dependencias de python
+```bash
+$ pip install wheel
+$ pip install pandas
+```
 
 Correr los programas:
 
-bin/spark-submit my_program.py
-
+```bash
+/path/to/spark-submit /path/to/my_program.py
+```
 
 Es importante mencionar que se deben cambiar directorios declarados dentro de cada uno de los archivos:
 
-Trainer, ubicación del archivo myCollection.csv
-Trainer, ubicación donde se guardarán los modelos
-Activity_recognizer, ubicación de los modelos guardados
-Data_feeder, ubicación del archivo myCollection.csv
+[Trainer](https://github.com/elden/cpmx8-machine-learning-with-accelerometer-of-xdk-bosch/blob/69eeee5d6c1136f86458e039991e8554a2d608e7/trainer.py), ubicación del archivo [myCollection.csv](https://github.com/elden/cpmx8-machine-learning-with-accelerometer-of-xdk-bosch/blob/69eeee5d6c1136f86458e039991e8554a2d608e7/trainer.py#L57)
 
-Finalmente al correr los programas te pedirá que resulevas dependencias...
+[Trainer](https://github.com/elden/cpmx8-machine-learning-with-accelerometer-of-xdk-bosch/blob/69eeee5d6c1136f86458e039991e8554a2d608e7/trainer.py), ubicación donde se guardarán los modelos
+ [L190](https://github.com/elden/cpmx8-machine-learning-with-accelerometer-of-xdk-bosch/blob/69eeee5d6c1136f86458e039991e8554a2d608e7/trainer.py#L190) [L197](https://github.com/elden/cpmx8-machine-learning-with-accelerometer-of-xdk-bosch/blob/69eeee5d6c1136f86458e039991e8554a2d608e7/trainer.py#L197)
 
-pip install "dependencia requerida..."
+[Activity_recognizer](https://github.com/elden/cpmx8-machine-learning-with-accelerometer-of-xdk-bosch/blob/69eeee5d6c1136f86458e039991e8554a2d608e7/Activity%20recognizer.py), ubicación de los modelos guardados [L84](https://github.com/elden/cpmx8-machine-learning-with-accelerometer-of-xdk-bosch/blob/69eeee5d6c1136f86458e039991e8554a2d608e7/Activity%20recognizer.py#L84)
+
+[Data_feeder](https://github.com/elden/cpmx8-machine-learning-with-accelerometer-of-xdk-bosch/blob/69eeee5d6c1136f86458e039991e8554a2d608e7/Data%20feeder.py), ubicación del archivo [myCollection.csv](https://github.com/elden/cpmx8-machine-learning-with-accelerometer-of-xdk-bosch/blob/69eeee5d6c1136f86458e039991e8554a2d608e7/Data%20feeder.py#L22)
+
+#### TODO
+
+* Recibir los archivos a analizar y los directorios destino para evitar tener rutas absolutas =D
 
 Happy code!
