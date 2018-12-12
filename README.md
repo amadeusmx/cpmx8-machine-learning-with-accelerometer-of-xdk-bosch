@@ -1,4 +1,4 @@
-# CPMX-8 XDK Bosh
+# CPMX-8 XDK Bosch
 
 ## Resumen
 
